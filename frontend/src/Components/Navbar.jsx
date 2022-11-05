@@ -74,31 +74,28 @@ export default function Navbar() {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"lg"}
-            fontWeight={800}
-            color={"white"}
-            bg={"pink.400"}
-            href={"#"}
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
+              <Button
+            as={'a'}
+            fontSize={'sm'}
+            fontWeight={400}
+            // variant={'link'}
+            color={'white'}
+            bg={'pink.400'}
+            href={'#'}>
             Admin
           </Button>
           {/* <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'white'}
-              bg={'pink.400'}
-              href={'#'}
-              _hover={{
-                bg: 'pink.300',
-              }}>
-              Sign Up
-            </Button> */}
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
+            color={'white'}
+            bg={'pink.400'}
+            href={'#'}
+            _hover={{
+              bg: 'pink.300',
+            }}>
+            Sign Up
+          </Button> */}
         </Stack>
       </Flex>
 
@@ -116,7 +113,7 @@ const DesktopNav = () => {
 
   return (
     <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
+      {/* {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
@@ -153,12 +150,12 @@ const DesktopNav = () => {
             )}
           </Popover>
         </Box>
-      ))}
+      ))} */}
     </Stack>
   );
 };
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
       href={href}
@@ -202,14 +199,14 @@ const MobileNav = () => {
       p={4}
       display={{ md: "none" }}
     >
-      {NAV_ITEMS.map((navItem) => (
+      {/* {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
+      ))} */}
     </Stack>
   );
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, href }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -262,50 +259,50 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   );
 };
 
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
+// interface NavItem {
+//   label: string;
+//   subLabel?: string;
+//   children?: Array<NavItem>;
+//   href?: string;
+// }
 
-const NAV_ITEMS: Array<NavItem> = [
-//   {
-//     label: "Inspiration",
-//     children: [
-//       {
-//         label: "Explore Design Work",
-//         subLabel: "Trending Design to inspire you",
-//         href: "#",
-//       },
-//       {
-//         label: "New & Noteworthy",
-//         subLabel: "Up-and-coming Designers",
-//         href: "#",
-//       },
-//     ],
-//   },
-//   {
-//     label: "Find Work",
-//     children: [
-//       {
-//         label: "Job Board",
-//         subLabel: "Find your dream design job",
-//         href: "#",
-//       },
-//       {
-//         label: "Freelance Projects",
-//         subLabel: "An exclusive list for contract work",
-//         href: "#",
-//       },
-//     ],
-//   },
-//   {
-//     label: "Learn Design",
-//     href: "#",
-//   },
-//   {
-//     label: "Hire Designers",
-//     href: "#",
-//   },
-];
+// const NAV_ITEMS: Array<NavItem> = [
+// //   {
+// //     label: "Inspiration",
+// //     children: [
+// //       {
+// //         label: "Explore Design Work",
+// //         subLabel: "Trending Design to inspire you",
+// //         href: "#",
+// //       },
+// //       {
+// //         label: "New & Noteworthy",
+// //         subLabel: "Up-and-coming Designers",
+// //         href: "#",
+// //       },
+// //     ],
+// //   },
+// //   {
+// //     label: "Find Work",
+// //     children: [
+// //       {
+// //         label: "Job Board",
+// //         subLabel: "Find your dream design job",
+// //         href: "#",
+// //       },
+// //       {
+// //         label: "Freelance Projects",
+// //         subLabel: "An exclusive list for contract work",
+// //         href: "#",
+// //       },
+// //     ],
+// //   },
+// //   {
+// //     label: "Learn Design",
+// //     href: "#",
+// //   },
+// //   {
+// //     label: "Hire Designers",
+// //     href: "#",
+// //   },
+// ];
