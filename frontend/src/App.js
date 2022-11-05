@@ -1,13 +1,15 @@
 
 import './App.css';
 import Navbar from './Components/Navbar';
+import AdminLogin from './Pages/AdminLogin';
 import Register from './Pages/Register';
 
 function App() {
   return (
     <div className="App">
       <Navbar/>
-      <Register/>
+      <Register/> 
+      {/* <AdminLogin/> */}
     </div>
   );
 }
