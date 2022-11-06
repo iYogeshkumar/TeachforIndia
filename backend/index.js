@@ -31,6 +31,22 @@ app.post("/", async (req, res) => {
   
 })
 
+// app.get("/listofcandidates",async(req, res)=>{
+//   const data = await Volunteer.find({})
+//   console.log(data)
+//   res.send(data)
+
+// })
+
+app.get("/listofcandidates", async function (req, res) {
+  try {
+    const data= await Volunteer.find().lean().exec();
+    return res.status(201).send(data);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+});
+
 app.listen(process.env.PORT, async () => {
     try {
       await connection;

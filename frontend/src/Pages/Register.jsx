@@ -14,6 +14,7 @@ import {
    
     Icon,
   } from '@chakra-ui/react';
+import { useState } from 'react';
   
   const avatars = [
     {
@@ -37,8 +38,55 @@ import {
       url: 'https://bit.ly/code-beast',
     },
   ];
+
+
   
-  export default function JoinOurTeam() {
+  export default function Register() {
+
+    const [user, setUser] = useState({
+      name: "",
+      email: "",
+      phone: "",
+      location: "",
+      spokenLanguages: "",
+      availability: "",
+
+    })
+
+    let name, value;
+    const handleInputs =(e)=>{
+      name= e.target.name;
+      value= e.target.value;
+
+      setUser({...user, [name]:value});
+    }
+
+    const Postdata = async (e)=>{
+      e.preventDefault();
+
+      const {name, email, phone, location, spokenLanguages, availability} = user;
+
+      const res = await fetch("http://localhost:8080/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name, email, phone, location, spokenLanguages, availability
+        })
+      });
+      const data = await res.json();
+      if(data.status === 422 || !data){
+        window.alert("Invalid Registration");
+        console.log("Invalid Registration");
+      } else {
+        window.alert("Registration successfully");
+        console.log("Registration successfully");
+
+        // history.push("/")
+      }
+    }
+
     return (
       <Box position={'relative'}>
         <Container
@@ -142,9 +190,12 @@ import {
                 of our Teach For India team and supports the students!
               </Text>
             </Stack>
-            <Box as={'form'} mt={10}>
+            <Box method="POST" as={'form'} mt={10}>
               <Stack spacing={4}>
                 <Input
+                  name="name"
+                  value={user.name}
+                  onChange={handleInputs}
                   placeholder="Name"
                   bg={'gray.100'}
                   border={0}
@@ -154,6 +205,9 @@ import {
                   }}
                 />
                 <Input
+                  name="email"
+                  value={user.email}
+                  onChange={handleInputs}
                   placeholder="Email"
                   bg={'gray.100'}
                   border={0}
@@ -163,6 +217,9 @@ import {
                   }}
                 />
                 <Input
+                name="phone"
+                value={user.phone}
+                onChange={handleInputs}
                   placeholder="Phone number"
                   bg={'gray.100'}
                   border={0}
@@ -172,6 +229,9 @@ import {
                   }}
                 />
                   <Input
+                  name="location"
+                  value={user.location}
+                  onChange={handleInputs}
                   placeholder="Location"
                   bg={'gray.100'}
                   border={0}
@@ -181,6 +241,9 @@ import {
                   }}
                 />
                   <Input
+                  name="spokenLanguages"
+                  value={user.spokenLanguages}
+                  onChange={handleInputs}
                   placeholder="Spoken Languages"
                   bg={'gray.100'}
                   border={0}
@@ -190,6 +253,9 @@ import {
                   }}
                 />
                   <Input
+                  name="availability"
+                  value={user.availability}
+                  onChange={handleInputs}
                   placeholder="Availability(which days of the week you are available)"
                   bg={'gray.100'}
                   border={0}
@@ -203,6 +269,10 @@ import {
                 </Button> */}
               </Stack>
               <Button
+                onClick={Postdata}
+                name="register"
+                type="submit"
+                value="register"
                 fontFamily={'heading'}
                 mt={8}
                 w={'full'}
