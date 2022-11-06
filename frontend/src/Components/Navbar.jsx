@@ -22,14 +22,18 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@chakra-ui/icons";
+import { useNavigate, Link as Go } from "react-router-dom";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
-
+  const navigate = useNavigate();
+  const handlelogin = () => {
+    navigate("/admin", { replace: true });
+  };
   return (
     <Box>
       <Flex
-        bg={useColorModeValue("gray.200", "gray.800")}
+        bg={useColorModeValue("#fffffd")}
         color={useColorModeValue("gray.600", "white")}
         minH={"60px"}
         py={{ base: 2 }}
@@ -54,14 +58,9 @@ export default function Navbar() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          {/* <Text
-              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-              fontFamily={'heading'}
-              color={useColorModeValue('gray.800', 'white')}> */}
-
-          <Image src="/teachforindia.png" alt="teach" />
-
-          {/* </Text> */}
+          <Go to="/">
+            <Image src="/logo.jpeg" alt="teach" />
+          </Go>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
@@ -74,28 +73,18 @@ export default function Navbar() {
           direction={"row"}
           spacing={6}
         >
-              <Button
-            as={'a'}
-            fontSize={'sm'}
+          <Button
+            onClick={handlelogin}
+            as={"a"}
+            fontSize={"sm"}
             fontWeight={400}
             // variant={'link'}
-            color={'white'}
-            bg={'pink.400'}
-            href={'#'}>
+            color={"white"}
+            bg={"pink.400"}
+            href={"#"}
+          >
             Admin
           </Button>
-          {/* <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            href={'#'}
-            _hover={{
-              bg: 'pink.300',
-            }}>
-            Sign Up
-          </Button> */}
         </Stack>
       </Flex>
 
@@ -111,48 +100,7 @@ const DesktopNav = () => {
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
-  return (
-    <Stack direction={"row"} spacing={4}>
-      {/* {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? "#"}
-                fontSize={"sm"}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: "none",
-                  color: linkHoverColor,
-                }}
-              >
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>
-      ))} */}
-    </Stack>
-  );
+  return <Stack direction={"row"} spacing={4}></Stack>;
 };
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
@@ -198,11 +146,7 @@ const MobileNav = () => {
       bg={useColorModeValue("white", "gray.800")}
       p={4}
       display={{ md: "none" }}
-    >
-      {/* {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))} */}
-    </Stack>
+    ></Stack>
   );
 };
 
@@ -258,51 +202,3 @@ const MobileNavItem = ({ label, children, href }) => {
     </Stack>
   );
 };
-
-// interface NavItem {
-//   label: string;
-//   subLabel?: string;
-//   children?: Array<NavItem>;
-//   href?: string;
-// }
-
-// const NAV_ITEMS: Array<NavItem> = [
-// //   {
-// //     label: "Inspiration",
-// //     children: [
-// //       {
-// //         label: "Explore Design Work",
-// //         subLabel: "Trending Design to inspire you",
-// //         href: "#",
-// //       },
-// //       {
-// //         label: "New & Noteworthy",
-// //         subLabel: "Up-and-coming Designers",
-// //         href: "#",
-// //       },
-// //     ],
-// //   },
-// //   {
-// //     label: "Find Work",
-// //     children: [
-// //       {
-// //         label: "Job Board",
-// //         subLabel: "Find your dream design job",
-// //         href: "#",
-// //       },
-// //       {
-// //         label: "Freelance Projects",
-// //         subLabel: "An exclusive list for contract work",
-// //         href: "#",
-// //       },
-// //     ],
-// //   },
-// //   {
-// //     label: "Learn Design",
-// //     href: "#",
-// //   },
-// //   {
-// //     label: "Hire Designers",
-// //     href: "#",
-// //   },
-// ];

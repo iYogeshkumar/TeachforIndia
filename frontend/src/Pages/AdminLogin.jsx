@@ -13,9 +13,10 @@ import {
   Avatar,
   FormControl,
   FormHelperText,
-  InputRightElement
+  InputRightElement,
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
@@ -24,6 +25,29 @@ const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
+  const navigate = useNavigate();
+  const [admin, setadmin] = useState({
+    email: "",
+    password: "",
+  });
+
+  var name, value;
+  const handleChange = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+
+    setadmin({ ...admin, [name]: value });
+  };
+
+  const handleList = (e) => {
+    console.log("adminname:", admin.email, "\n", "adminpass:", admin.password);
+
+    if (admin.email == "" && admin.password == "") {
+      alert("Fill the fields");
+    } else {
+      navigate("/listofcandidates", { replace: true });
+    }
+  };
 
   return (
     <Flex
@@ -56,7 +80,13 @@ const AdminLogin = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" />
+                  <Input
+                    onChange={handleChange}
+                    type="email"
+                    name="email"
+                    value={admin.email}
+                    placeholder="email address"
+                  />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -67,6 +97,9 @@ const AdminLogin = () => {
                     children={<CFaLock color="gray.300" />}
                   />
                   <Input
+                    onChange={handleChange}
+                    name="password"
+                    value={admin.password}
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
                   />
@@ -80,7 +113,9 @@ const AdminLogin = () => {
                   <Link>forgot password?</Link>
                 </FormHelperText>
               </FormControl>
+
               <Button
+                onClick={handleList}
                 borderRadius={0}
                 type="submit"
                 variant="solid"
@@ -93,12 +128,6 @@ const AdminLogin = () => {
           </form>
         </Box>
       </Stack>
-      {/* <Box>
-        New to us?{" "}
-        <Link color="teal.500" href="#">
-          Sign Up
-        </Link>
-      </Box> */}
     </Flex>
   );
 };
