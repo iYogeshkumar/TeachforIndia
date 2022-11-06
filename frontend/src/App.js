@@ -9,10 +9,10 @@ import Register from './Pages/Register';
 function App() {
   return (
     <div className="App">
-      <Navbar/>
-      <Register/> 
+      {/* <Navbar/> */}
+      {/* <Register/>  */}
       {/* <AdminLogin/> */}
-      {/* <ListOfCandidates/> */}
+      <ListOfCandidates/>
     </div>
   );
 }
